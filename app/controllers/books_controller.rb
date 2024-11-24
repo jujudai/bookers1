@@ -1,9 +1,5 @@
 class BooksController < ApplicationController
 
-  def
-    top
-  end
-
   def index
     @books = Book.all
     @book = Book.new
@@ -12,9 +8,12 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     if @book.save
-      redirect_to books_path, notice: 
+      flash[:notice] = "投稿に成功しました。"
+      redirect_to book_path(@book.id)
     else
-      render :new
+      flash[:notice] = "投稿に失敗しました。"
+      @books = Book.all # エラー時に一覧ページを再表示
+      render :index
     end
   end
 
