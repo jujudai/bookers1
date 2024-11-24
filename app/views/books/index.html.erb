@@ -7,3 +7,34 @@
     <th>Body</th>
   </tr>
  </thead>
+
+ <tbody>
+ <% @books.each do |book| %>
+   <tr>
+     <td><%= book.title %></td>
+     <td><%= book.body %></td>
+     <td>
+       <%= link_to 'Show', book_path(book) %>
+       <%= link_to 'Edit', edit_book_path(book) %>
+       <%= link_to 'Destroy', book_path(book), method: :delete, data: { confirm: 'Are you sure?' } %>
+     </td>
+   </tr>
+ <% end %>
+</tbody>
+</table>
+
+
+<h2>New book</h2>
+<%= form_with model: @book, local: true do |form| %>
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <div>
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </div>
+  <div>
+    <%= form.submit 'Create Book' %>
+  </div>
+<% end %>
