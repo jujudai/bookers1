@@ -1,4 +1,9 @@
 class BooksController < ApplicationController
+
+  def
+    top
+  end
+
   def index
     @books = Book.all
     @book = Book.new
@@ -7,7 +12,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     if @book.save
-      redirect_to books_path(@Book.id)
+      redirect_to books_path, notice: 
     else
       render :new
     end
